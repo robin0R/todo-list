@@ -1,6 +1,5 @@
 const express = require("express");
 const cors = require("cors");
-res.setHeader("Cache-Control", "public, max-age=3600");
 const profiler = require("v8-profiler-node8");
 
 const app = express();
@@ -22,6 +21,11 @@ setTimeout(() => {
 
 app.use(cors());
 app.use(express.json());
+
+app.use((req, res, next) => {
+  res.setHeader("Cache-Control", "public, max-age=3600");
+  next();
+});
 
 const tasks = [
   { id: 1, name: "items 1" },
