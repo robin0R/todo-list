@@ -1,10 +1,11 @@
 const express = require("express");
 const cors = require("cors");
-const profiler = require("v8-profiler-node8");
+//const profiler = require("v8-profiler-node8");
 
 const app = express();
 const PORT = 3001;
 
+/*
 // Démarre le profiling pour une durée de 30 secondes
 profiler.startProfiling("Profile1", true);
 
@@ -18,6 +19,7 @@ setTimeout(() => {
     .pipe(fs.createWriteStream(`profiles/profile-${Date.now()}.cpuprofile`))
     .on("finish", () => profile1.delete());
 }, 30000);
+*/
 
 app.use(cors());
 app.use(express.json());
