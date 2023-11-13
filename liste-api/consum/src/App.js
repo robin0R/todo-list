@@ -5,6 +5,7 @@ import './App.css';
 const App = () => {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState('');
+  const [backendUrl, setBackendUrl] = useState('');
 
   useEffect(() => {
     fetchTasks();
@@ -12,7 +13,7 @@ const App = () => {
 
   const fetchTasks = async () => {
     try {
-      const response = await axios.get('https://todo-list-back-dbx98r7xr-robin0rs-projects.vercel.app/api/getTask');
+      const response = await axios.get(`https://${backendUrl}/api/getTask`);
       setTasks(response.data);
     } catch (error) {
       console.error('Erreur lors de la récupération des tâches', error);
@@ -22,7 +23,7 @@ const App = () => {
   const addTask = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('https://todo-list-back-dbx98r7xr-robin0rs-projects.vercel.app/api/addTask', { name: newTask });
+      await axios.post(`https://${backendUrl}/api/addTask`, { name: newTask });
       fetchTasks();
       setNewTask('');
     } catch (error) {
@@ -32,7 +33,7 @@ const App = () => {
 
   const deleteTask = async (taskId) => {
     try {
-      await axios.delete(`https://todo-list-back-dbx98r7xr-robin0rs-projects.vercel.app/api/deleteTask/${taskId}`);
+      await axios.delete(`https://${backendUrl}/api/deleteTask/${taskId}`);
       fetchTasks();
     } catch (error) {
       console.error('Erreur lors de la suppression de la tâche', error);
@@ -42,6 +43,15 @@ const App = () => {
   return (
     <div>
       <h1>Liste de tâches</h1>
+      <div>
+        <label htmlFor="backendUrl">URL du backend :</label>
+        <input
+          type="text"
+          id="backendUrl"
+          value={backendUrl}
+          onChange={(e) => setBackendUrl(e.target.value)}
+        />
+      </div>
       <form onSubmit={addTask}>
         <input
           type="text"
