@@ -12,7 +12,7 @@ const App = () => {
 
   const fetchTasks = async () => {
     try {
-      const response = await axios.get('http://localhost:3001/api/getTask');
+      const response = await axios.get('https://todo-list-back-dbx98r7xr-robin0rs-projects.vercel.app/api/getTask');
       setTasks(response.data);
     } catch (error) {
       console.error('Erreur lors de la récupération des tâches', error);
@@ -22,7 +22,7 @@ const App = () => {
   const addTask = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:3001/api/addTask', { name: newTask });
+      await axios.post('https://todo-list-back-dbx98r7xr-robin0rs-projects.vercel.app/api/addTask', { name: newTask });
       fetchTasks();
       setNewTask('');
     } catch (error) {
@@ -32,7 +32,7 @@ const App = () => {
 
   const deleteTask = async (taskId) => {
     try {
-      await axios.delete(`http://localhost:3001/api/deleteTask/${taskId}`);
+      await axios.delete(`https://todo-list-back-dbx98r7xr-robin0rs-projects.vercel.app/api/deleteTask/${taskId}`);
       fetchTasks();
     } catch (error) {
       console.error('Erreur lors de la suppression de la tâche', error);
